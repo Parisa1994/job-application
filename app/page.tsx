@@ -13,7 +13,7 @@ const Page = () => {
 
     return null;
   };
-  return <Redirect to="/" />;
+  return <Redirect to="/panel" />;
 };
 
 export default Page;

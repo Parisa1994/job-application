@@ -1,4 +1,6 @@
 "use client";
+import { Button } from "@mui/material";
+import NextLink from "next/link";
 
 // next
 import Head from "next/head";
@@ -7,15 +9,18 @@ export default function Page404() {
   return (
     <>
       <Head>
-        <title> صفحه یافت نشد</title>
+        <title> not found Page </title>
       </Head>
-      <div>
-        <h1>
-          متاسفانه صفحه درخواستی یافت نشد. لطفا آدرس مرورگر را بررسی نمایید.
-        </h1>
-        {/* <Button component={NextLink} href='/panel/dashboard' size='large' variant='contained'>
-          بازگشت به صفحه نخست
-        </Button> */}
+      <div className="text-center mt-10">
+        <h1 className="mb-8"> 404 not found Page</h1>
+        <Button
+          component={NextLink}
+          href="/panel"
+          size="large"
+          variant="contained"
+        >
+          home
+        </Button>
       </div>
     </>
   );
