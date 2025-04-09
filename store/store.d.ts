@@ -15,23 +15,28 @@ export type Skill =
   | "kubernetes"
   | "figma";
 
-export interface FormState {
+export interface FormData {
   fullName: string;
   email: string;
-  jobRole: JobRole | "";
+  jobRole: JobRole;
   yearsOfExperience: number;
   skills: Skill[];
   coverLetter: string;
-  isDarkMode: boolean;
+}
+
+export interface FormState {
   currentStep: number;
   isSubmitting: boolean;
   submitted: boolean;
-
-  // Actions
-  setField: <K extends keyof FormState>(field: K, value: FormState[K]) => void;
-  resetForm: () => void;
-  toggleDarkMode: () => void;
-  setSubmitting: (value: boolean) => void;
+  formData: FormData;
+  isDarkMode: boolean;
+  setField: (
+    field: keyof FormData | "submitted",
+    value: FormData[keyof FormData] | boolean
+  ) => void;
   nextStep: () => void;
   previousStep: () => void;
+  setSubmitting: (isSubmitting: boolean) => void;
+  toggleDarkMode: () => void;
+  resetForm: () => void;
 }

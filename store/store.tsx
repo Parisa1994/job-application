@@ -13,16 +13,18 @@ type FormStateWithoutActions = Omit<
 >;
 
 const initialState: FormStateWithoutActions = {
-  fullName: "",
-  email: "",
-  jobRole: "" as JobRole | "",
-  yearsOfExperience: 0,
-  skills: [] as Skill[],
-  coverLetter: "",
-  isDarkMode: false,
   currentStep: 1,
   isSubmitting: false,
   submitted: false,
+  isDarkMode: false,
+  formData: {
+    fullName: "",
+    email: "",
+    jobRole: "frontend" as JobRole,
+    yearsOfExperience: 0,
+    skills: [] as Skill[],
+    coverLetter: "",
+  },
 };
 
 export const useFormStore = create<FormState>()(
@@ -30,13 +32,35 @@ export const useFormStore = create<FormState>()(
     (set) => ({
       ...initialState,
 
-      setField: <K extends keyof FormState>(field: K, value: FormState[K]) =>
-        set((state: FormState) => ({ ...state, [field]: value })),
+      setField: (field, value) =>
+        set((state) => {
+          if (field === "submitted") {
+            return { ...state, submitted: value as boolean };
+          }
+          return {
+            ...state,
+            formData: {
+              ...state.formData,
+              [field]: value,
+            },
+          };
+        }),
 
       resetForm: () => set(initialState),
 
       toggleDarkMode: () =>
-        set((state: FormState) => ({ isDarkMode: !state.isDarkMode })),
+        set((state: FormState) => {
+          const newDarkMode = !state.isDarkMode;
+          if (typeof window !== "undefined") {
+            localStorage.setItem("theme", newDarkMode ? "dark" : "light");
+            if (newDarkMode) {
+              document.documentElement.classList.add("dark");
+            } else {
+              document.documentElement.classList.remove("dark");
+            }
+          }
+          return { isDarkMode: newDarkMode };
+        }),
 
       setSubmitting: (value: boolean) => set({ isSubmitting: value }),
 
@@ -50,6 +74,10 @@ export const useFormStore = create<FormState>()(
     }),
     {
       name: "job-application-storage",
+      partialize: (state) => ({
+        ...state,
+        isDarkMode: state.isDarkMode,
+      }),
     }
   )
 );
