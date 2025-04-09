@@ -10,6 +10,7 @@ type FormStateWithoutActions = Omit<
   | "setSubmitting"
   | "nextStep"
   | "previousStep"
+  | "setDataReady"
 >;
 
 const initialState: FormStateWithoutActions = {
@@ -17,6 +18,7 @@ const initialState: FormStateWithoutActions = {
   isSubmitting: false,
   submitted: false,
   isDarkMode: false,
+  isDataReady: false,
   formData: {
     fullName: "",
     email: "",
@@ -64,6 +66,8 @@ export const useFormStore = create<FormState>()(
 
       setSubmitting: (value: boolean) => set({ isSubmitting: value }),
 
+      setDataReady: (value: boolean) => set({ isDataReady: value }),
+
       nextStep: () =>
         set((state: FormState) => ({ currentStep: state.currentStep + 1 })),
 
@@ -78,6 +82,13 @@ export const useFormStore = create<FormState>()(
         ...state,
         isDarkMode: state.isDarkMode,
       }),
+      onRehydrateStorage: () => (state, error) => {
+        if (!error) {
+          setTimeout(() => {
+            useFormStore.getState().setDataReady(true);
+          }, 0);
+        }
+      },
     }
   )
 );

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -58,6 +59,7 @@ interface JobApplicationFormProps {
   onNext: () => void;
   onPrevious: () => void;
 }
+// [{step:1,component:<></>},{step:2,}]
 
 const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
   onSubmit,
@@ -123,7 +125,6 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
           />
         ))}
       </div>
-
       {currentStep === 1 && (
         <div>
           <Controller
@@ -133,7 +134,7 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
               <CustomInput
                 label="Full Name"
                 type="text"
-                value={field.value}
+                value={field.value || ""}
                 onChange={(value) => field.onChange(value)}
                 error={errors.fullName?.message}
                 required
@@ -147,7 +148,7 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
               <CustomInput
                 label="Email"
                 type="email"
-                value={field.value}
+                value={field.value || ""}
                 onChange={(value) => field.onChange(value)}
                 error={errors.email?.message}
                 required
@@ -200,6 +201,7 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
                   <input
                     type="number"
                     {...field}
+                    value={field.value || ""}
                     onChange={(e) => field.onChange(Number(e.target.value))}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-white"
                   />
@@ -267,7 +269,7 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
             <CustomInput
               label="Cover Letter"
               type="textarea"
-              value={field.value}
+              value={field.value || ""}
               onChange={(value) => field.onChange(value)}
               error={errors.coverLetter?.message}
               required

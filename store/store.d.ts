@@ -30,6 +30,7 @@ export interface FormState {
   submitted: boolean;
   formData: FormData;
   isDarkMode: boolean;
+  isDataReady: boolean;
   setField: (
     field: keyof FormData | "submitted",
     value: FormData[keyof FormData] | boolean
@@ -37,6 +38,7 @@ export interface FormState {
   nextStep: () => void;
   previousStep: () => void;
   setSubmitting: (isSubmitting: boolean) => void;
+  setDataReady: (isDataReady: boolean) => void;
   toggleDarkMode: () => void;
   resetForm: () => void;
 }

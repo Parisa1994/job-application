@@ -26,7 +26,7 @@ export default function ThemeProvider({
       >
         {isDarkMode ? "dark 🌙" : "light 🌞"}
       </button>
-      <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors">
+      <div className="min-h-screen bg-white text-black dark:bg-gray-900  dark:text-white transition-colors">
         <div className="container mx-auto px-4">{children}</div>
       </div>
     </>
