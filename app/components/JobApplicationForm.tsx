@@ -1,17 +1,11 @@
 "use client";
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  jobRoles,
-  skills,
-  skillValues,
-  JobRole,
-  Skill,
-} from "@/app/constants/jobData";
-import CustomInput from "./CustomInput";
+import { jobRoles, skillValues, JobRole, Skill } from "@/app/constants/jobData";
 import { Resolver } from "react-hook-form";
+import { Step1, Step2, Step3, Step4 } from "./steps";
 
 export type FormData = {
   fullName: string;
@@ -59,7 +53,6 @@ interface JobApplicationFormProps {
   onNext: () => void;
   onPrevious: () => void;
 }
-// [{step:1,component:<></>},{step:2,}]
 
 const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
   onSubmit,
@@ -108,10 +101,25 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
     }
   };
 
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <Step1 control={control} errors={errors} />;
+      case 2:
+        return <Step2 control={control} errors={errors} />;
+      case 3:
+        return <Step3 control={control} errors={errors} />;
+      case 4:
+        return <Step4 control={control} errors={errors} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg"
+      className="space-y-6 bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg"
     >
       <div className="flex justify-between mb-6">
         {[1, 2, 3, 4].map((step) => (
@@ -125,158 +133,8 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
           />
         ))}
       </div>
-      {currentStep === 1 && (
-        <div>
-          <Controller
-            name="fullName"
-            control={control}
-            render={({ field }) => (
-              <CustomInput
-                label="Full Name"
-                type="text"
-                value={field.value || ""}
-                onChange={(value) => field.onChange(value)}
-                error={errors.fullName?.message}
-                required
-              />
-            )}
-          />
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <CustomInput
-                label="Email"
-                type="email"
-                value={field.value || ""}
-                onChange={(value) => field.onChange(value)}
-                error={errors.email?.message}
-                required
-              />
-            )}
-          />
-        </div>
-      )}
 
-      {currentStep === 2 && (
-        <div>
-          <div className="mb-4">
-            <Controller
-              name="jobRole"
-              control={control}
-              render={({ field }) => (
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
-                    Job Role
-                  </label>
-                  <select
-                    {...field}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-                  >
-                    <option value="">Select a role</option>
-                    {jobRoles.map((role) => (
-                      <option key={role.value} value={role.value}>
-                        {role.label}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.jobRole && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.jobRole.message}
-                    </p>
-                  )}
-                </div>
-              )}
-            />
-          </div>
-          <div className="mb-4">
-            <Controller
-              name="yearsOfExperience"
-              control={control}
-              render={({ field }) => (
-                <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
-                    Years of Experience
-                  </label>
-                  <input
-                    type="number"
-                    {...field}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-                  />
-                  {errors.yearsOfExperience && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.yearsOfExperience.message}
-                    </p>
-                  )}
-                </div>
-              )}
-            />
-          </div>
-        </div>
-      )}
-
-      {currentStep === 3 && (
-        <div className="mb-4">
-          <Controller
-            name="skills"
-            control={control}
-            render={({ field }) => (
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
-                  Skills
-                </label>
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  {skills.map((skill) => (
-                    <label
-                      key={skill.value}
-                      className="flex items-center space-x-2 p-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={field.value?.includes(skill.value as Skill)}
-                        onChange={(e) => {
-                          const newValue = e.target.checked
-                            ? [...(field.value || []), skill.value as Skill]
-                            : (field.value || []).filter(
-                                (s) => s !== skill.value
-                              );
-                          field.onChange(newValue);
-                        }}
-                        className="rounded text-blue-500"
-                      />
-                      <span className="dark:text-white">{skill.label}</span>
-                    </label>
-                  ))}
-                </div>
-                {errors.skills && (
-                  <p className="mt-1 text-sm text-red-500">
-                    {errors.skills.message}
-                  </p>
-                )}
-              </div>
-            )}
-          />
-        </div>
-      )}
-
-      {currentStep === 4 && (
-        <Controller
-          name="coverLetter"
-          control={control}
-          render={({ field }) => (
-            <CustomInput
-              label="Cover Letter"
-              type="textarea"
-              value={field.value || ""}
-              onChange={(value) => field.onChange(value)}
-              error={errors.coverLetter?.message}
-              required
-            />
-          )}
-        />
-      )}
+      {renderStep()}
 
       <div className="flex justify-between mt-6">
         {currentStep > 1 && (

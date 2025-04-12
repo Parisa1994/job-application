@@ -5,6 +5,8 @@ import { useFormStore } from "@/store/store";
 import JobApplicationForm from "./components/JobApplicationForm";
 import SubmittedFormView from "./components/SubmittedFormView";
 import { FormData } from "./components/JobApplicationForm";
+import Header from "./components/Header";
+import Loading from "./components/Loading";
 
 const JobPage = () => {
   const {
@@ -31,15 +33,12 @@ const JobPage = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8 transition-colors">
-      <div className="container">
-        {/* کامپوننت کن هدر را */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Job Application Form
-          </h1>
-        </div>
-        {/* کامپوننت کن هدر را */}
+    <main className="min-h-screen bg-gray-50 dark:bg-gray-800">
+      <Header
+        title="Job Application Form"
+        subtitle="Please fill out the form below to apply for the position"
+      />
+      <div className="container mx-auto px-4 py-12">
         {isDataReady ? (
           !submitted ? (
             <JobApplicationForm
@@ -53,10 +52,10 @@ const JobPage = () => {
             <SubmittedFormView formValues={formData} />
           )
         ) : (
-          <>loading..</>
+          <Loading message="Loading application form..." />
         )}
       </div>
-    </div>
+    </main>
   );
 };
 
