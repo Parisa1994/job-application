@@ -25,7 +25,10 @@ const schema = yup
     email: yup
       .string()
       .required("Email is required")
-      .email("Invalid email format"),
+      .matches(
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        "Please enter a valid email address"
+      ),
     jobRole: yup
       .string()
       .oneOf(jobRoles.map((r) => r.value) as JobRole[])
@@ -33,7 +36,8 @@ const schema = yup
     yearsOfExperience: yup
       .number()
       .required("Years of experience is required")
-      .min(0, "Years must be 0 or greater"),
+      .min(0, "Years must be 0 or greater")
+      .max(99, "Years of experience cannot exceed 99"),
     skills: yup
       .array()
       .of(yup.string().oneOf(skillValues))

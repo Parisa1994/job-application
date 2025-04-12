@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Job Application Form
+
+A modern, responsive job application form built with Next.js, React, and Material-UI. This application provides a user-friendly interface for job seekers to submit their applications with form validation and state management.
+
+## Features
+
+- 🎨 Modern UI with Material-UI components
+- 📱 Fully responsive design
+- ✅ Form validation using React Hook Form and Yup
+- 🔄 State management with Zustand
+- 🎯 TypeScript for type safety
+- 🎨 Styling with Tailwind CSS
+
+## Tech Stack
+
+- **Framework:** Next.js 15.2.4
+- **UI Library:** React 19
+- **Component Library:** Material-UI
+- **Form Handling:** React Hook Form
+- **Validation:** Yup
+- **State Management:** Zustand
+- **Styling:** Tailwind CSS
+- **Language:** TypeScript
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (Latest LTS version recommended)
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone [your-repository-url]
+cd job-application
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Starts the development server with Turbopack
+- `npm run build` - Creates an optimized production build
+- `npm run start` - Runs the production build
+- `npm run lint` - Runs ESLint for code linting
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+job-application/
+├── app/              # Next.js app directory
+├── public/           # Static assets
+├── store/            # Zustand store files
+├── components/       # Reusable components
+└── styles/          # Global styles and Tailwind config
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgments
+
+- Next.js team for the amazing framework
+- Material-UI for the component library
+- All contributors who have helped this project grow

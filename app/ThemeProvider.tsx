@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useFormStore } from "../store/store";
+import { useFormStore } from "@/store/store";
 
 export default function ThemeProvider({
   children,
