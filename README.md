@@ -1,4 +1,4 @@
-# Job Application Form
+# job-application-form
 
 A modern, responsive job application form built with Next.js, React, and Material-UI. This application provides a user-friendly interface for job seekers to submit their applications with form validation and state management.
 
