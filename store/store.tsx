@@ -78,16 +78,12 @@ export const useFormStore = create<FormState>()(
     }),
     {
       name: "job-application-storage",
-      partialize: (state) => ({
-        ...state,
-        isDarkMode: state.isDarkMode,
-      }),
+      partialize: (state) => ({ isDarkMode: state.isDarkMode }),
       onRehydrateStorage: () => (state, error) => {
-        if (!error) {
-          setTimeout(() => {
-            useFormStore.getState().setDataReady(true);
-          }, 0);
-        }
+        if (error) console.error("Could not restore settings", error);
+        setTimeout(() => {
+          useFormStore.getState().setDataReady(true);
+        }, 0);
       },
     }
   )

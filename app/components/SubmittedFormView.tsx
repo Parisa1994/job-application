@@ -12,8 +12,9 @@ const SubmittedFormView: React.FC<SubmittedFormViewProps> = ({
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
       <h2 className="text-xl font-bold mb-4 dark:text-white">
-        Application Submitted
+        Application Preview
       </h2>
+      <p className="mb-4 text-sm text-gray-600 dark:text-gray-300">This is a demo preview. Your application has not been sent.</p>
       <div className="space-y-4">
         <div>
           <h3 className="font-medium dark:text-gray-200">Full Name</h3>

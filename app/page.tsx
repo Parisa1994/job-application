@@ -39,6 +39,7 @@ const JobPage = () => {
         subtitle="Please fill out the form below to apply for the position"
       />
       <div className="container mx-auto px-4 py-12">
+        <p className="mb-4 rounded-lg bg-blue-50 p-4 text-sm text-blue-900" role="note">Demo only: applications are not sent to an employer. Please do not enter sensitive personal information.</p>
         {isDataReady ? (
           !submitted ? (
             <JobApplicationForm

@@ -17,11 +17,14 @@ const Step2: React.FC<Step2Props> = ({ control, errors }) => {
           control={control}
           render={({ field }) => (
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label htmlFor="job-role" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                 Job Role
               </label>
               <select
                 {...field}
+                id="job-role"
+                value={field.value ?? ""}
+                aria-invalid={!!errors.jobRole}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-white"
               >
                 <option value="">Select a role</option>
@@ -46,14 +49,18 @@ const Step2: React.FC<Step2Props> = ({ control, errors }) => {
           control={control}
           render={({ field }) => (
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label htmlFor="years-of-experience" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                 Years of Experience
               </label>
               <input
                 type="number"
                 {...field}
-                value={field.value || ""}
-                onChange={(e) => field.onChange(Number(e.target.value))}
+                id="years-of-experience"
+                min={0}
+                max={99}
+                value={field.value ?? ""}
+                aria-invalid={!!errors.yearsOfExperience}
+                onChange={(e) => field.onChange(e.target.value === "" ? undefined : Number(e.target.value))}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-white"
               />
               {errors.yearsOfExperience && (

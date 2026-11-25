@@ -1,6 +1,6 @@
 # job-application-form
 
-A modern, responsive job application form built with Next.js, React, and Material-UI. This application provides a user-friendly interface for job seekers to submit their applications with form validation and state management.
+A responsive multi-step job application form demo built with Next.js and React. It validates input and displays a preview; it does not send applications to an employer or backend. Avoid entering sensitive personal data.
 
 ## Features
 
@@ -34,7 +34,7 @@ A modern, responsive job application form built with Next.js, React, and Materia
 1. Clone the repository:
 
 ```bash
-git clone [your-repository-url]
+git clone https://github.com/Parisa1994/job-application.git
 cd job-application
 ```
 
@@ -81,10 +81,6 @@ job-application/
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
 
